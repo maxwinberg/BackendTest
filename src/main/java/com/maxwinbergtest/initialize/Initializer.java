@@ -5,12 +5,17 @@ import com.maxwinbergtest.model.database.DatabaseHandler;
 import com.maxwinbergtest.model.event.EventBusHandler;
 import com.maxwinbergtest.view.ConsoleView;
 
-import java.io.Console;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import org.springframework.boot.autoconfigure.data.mongo.MongoDataAutoConfiguration;
+import org.springframework.boot.autoconfigure.mongo.MongoAutoConfiguration;
 
-@SpringBootApplication
+@SpringBootApplication(exclude = {
+        MongoAutoConfiguration.class,
+        MongoDataAutoConfiguration.class
+}, scanBasePackages = {"com.maxwinbergtest.model.api"})
 public class Initializer{
 
     public Initializer(){
@@ -22,7 +27,6 @@ public class Initializer{
         //Initializing Singletons
         EventBusHandler.getInstance();
         DatabaseHandler.getInstance();
-        RESTApi.getInstance();
 
         //Init Views
         new ConsoleView();

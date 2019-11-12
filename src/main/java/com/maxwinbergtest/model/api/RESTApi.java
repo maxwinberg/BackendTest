@@ -2,13 +2,9 @@ package com.maxwinbergtest.model.api;
 
 
 import com.maxwinbergtest.model.database.DatabaseHandler;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+import com.mongodb.DBObject;
 import com.maxwinbergtest.model.christmas.ChristmasPresent;
 import java.util.List;
 import java.util.ArrayList;
@@ -16,33 +12,34 @@ import java.util.ArrayList;
 @RestController
 public class RESTApi{
 
-    private static RESTApi instance = null;
+    private static final String hi = "Heeeey Inovia!!";
     private DatabaseHandler database;
 
-    private RESTApi(){
+    public RESTApi(){
         System.out.println("REST API have started");
         this.database = DatabaseHandler.getInstance();
     }
 
-    public static RESTApi getInstance(){
-        if(instance == null){
-            instance = new RESTApi();
-        }
-        return instance;
+    //@RequestMapping(value = "/sayhi", method = RequestMethod.GET,
+     //       produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/sayhi", method = RequestMethod.GET)
+    public String sayhi(){
+        System.out.println("CALLING SAY HI");
+        return hi;
     }
 
     @GetMapping("/wishlist")
-    List<ChristmasPresent> all(){
-        return new ArrayList<ChristmasPresent>();
+    List<DBObject> all(){
+        return this.database.getAllWishes();
     }
 
     @PostMapping(value = "/makeawish", consumes = "application/json", produces = "application/json")
-    public ChristmasPresent createWish(@RequestBody ChristmasPresent wish){
-        return this.database.saveWish(wish);
+    public void createWish(@RequestBody ChristmasPresent wish){
+        this.database.saveWish(wish);
     }
 
     @GetMapping("/wish/{name}")
-    public ChristmasPresent findwish(@PathVariable String name){
-        return this.database.findWish(name);
+    public DBObject getWish(@PathVariable String name){
+        return this.database.getWish(name);
     }
 }
