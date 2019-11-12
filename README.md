@@ -1,6 +1,12 @@
 #Heeey Inovia! - BackendTest README
 #This was developed and executed on Ubuntu!
 
+#What i could spend more time on:
+#- Create proper test cases
+#- better API responses
+
+
+#to run the program, stand in project root.
 mvn spring-boot:run
 
 
