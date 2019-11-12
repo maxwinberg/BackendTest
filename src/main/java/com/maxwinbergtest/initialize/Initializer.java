@@ -1,8 +1,8 @@
 package com.maxwinbergtest.initialize;
 
+import com.maxwinbergtest.model.event.EventBusHandler;
 import com.maxwinbergtest.model.api.RESTApi;
 import com.maxwinbergtest.model.database.DatabaseHandler;
-import com.maxwinbergtest.model.event.EventBusHandler;
 import com.maxwinbergtest.view.ConsoleView;
 
 
@@ -24,12 +24,15 @@ public class Initializer{
         System.out.println("Starting Max Winberg Backend Test");
         System.out.println("Heeey Inovia! Lets create great AI solutions!");
 
-        //Initializing Singletons
+        //Init Eventbus
         EventBusHandler.getInstance();
-        DatabaseHandler.getInstance();
 
         //Init Views
         new ConsoleView();
+
+        //Initializing Singletons
+        DatabaseHandler.getInstance();
+
     }
 
     public static void main(String[] args){

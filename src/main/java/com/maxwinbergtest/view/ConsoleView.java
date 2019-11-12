@@ -2,6 +2,7 @@ package com.maxwinbergtest.view;
 
 import com.maxwinbergtest.model.event.EventBusHandler;
 import com.maxwinbergtest.model.event.Subscriber;
+import java.util.Date;
 
 public class ConsoleView implements Subscriber{
 
@@ -11,12 +12,17 @@ public class ConsoleView implements Subscriber{
     }
 
 
-    public void receiveEvent(String message) {
-        System.out.println("New database Message!");
-        System.out.println("Message: " + message);
+    public void receiveEvent(String event, String message) {
+        Date time = new Date();
+        if(event.contains("ERROR")){
+            System.out.println("<!!WARNING!!"+time.toString()+" - "+ event +" !!WARNING!!>: " + message);
+        }else{
+            System.out.println("["+time.toString()+" - "+ event +" ]: " + message);
+        }
+
     }
 
     public String[] getSubscriptions() {
-        return new String[] { "Database", "RESTApi"};
+        return new String[] { "Database", "RESTApi", "ERROR"};
     }
 }

@@ -6,6 +6,8 @@ public class ChristmasPresent {
     private float cost;
     private String store;
 
+    ChristmasPresent(){}
+
     public ChristmasPresent(String presentName, float cost, String store){
         this.presentName = presentName;
         this.cost = cost;
@@ -22,5 +24,17 @@ public class ChristmasPresent {
 
     public float getCost(){
         return this.cost;
+    }
+
+    public void setPresentName(String presentName){
+        this.presentName = presentName;
+    }
+
+    public void setCost(float cost){
+        this.cost = cost;
+    }
+
+    public void setStore(String store){
+        this.store = store;
     }
 }
