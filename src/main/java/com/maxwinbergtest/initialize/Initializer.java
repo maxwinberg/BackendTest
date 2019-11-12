@@ -7,6 +7,10 @@ import com.maxwinbergtest.view.ConsoleView;
 
 import java.io.Console;
 
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
 public class Initializer{
 
     public Initializer(){
@@ -28,7 +32,8 @@ public class Initializer{
 
         //Add startup args if the program shall be able to start in different ways.
         if(args.length == 0){
-            new Initializer();
+            SpringApplication.run(Initializer.class, args);
+            //new Initializer();
         }
     }
 }
